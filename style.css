@@ -1,14 +1,10 @@
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
 
 /* ===== SKY ===== */
 body{
   height:100vh;
   overflow:hidden;
-  background:linear-gradient(to top,#7ec8ff,#cfefff);
+  background:linear-gradient(to top,#7ecbff,#dff3ff);
   font-family:Arial, sans-serif;
   position:relative;
 }
@@ -18,12 +14,46 @@ body{
   position:absolute;
   top:60px;
   right:120px;
-  width:120px;
-  height:120px;
-  background:radial-gradient(circle,#fff176,#fbc02d);
+  width:110px;
+  height:110px;
+  background:#ffd966;
   border-radius:50%;
-  box-shadow:0 0 60px rgba(255,200,0,0.7);
+  box-shadow:0 0 80px rgba(255,217,102,0.6);
 }
+
+/* ===== CLOUDS ===== */
+.cloud{
+  position:absolute;
+  top:80px;
+  width:140px;
+  height:50px;
+  background:white;
+  border-radius:50px;
+  opacity:0.9;
+  animation:drift 60s linear infinite;
+}
+.cloud::before,
+.cloud::after{
+  content:"";
+  position:absolute;
+  background:white;
+  border-radius:50%;
+}
+.cloud::before{width:60px;height:60px;top:-25px;left:20px;}
+.cloud::after{width:80px;height:80px;top:-40px;right:20px;}
+.c1{left:-200px;}
+.c2{top:140px;left:-400px;animation-duration:80s;}
+.c3{top:200px;left:-600px;animation-duration:100s;}
+@keyframes drift{to{transform:translateX(140vw);}}
+
+/* ===== BIRDS ===== */
+.bird{position:absolute;left:-100px;width:50px;animation:fly 20s linear infinite;}
+.bird svg{width:100%;}
+.bird path{fill:#333;animation:flap 0.8s ease-in-out infinite;}
+.b1{top:25%;}
+.b2{top:35%;animation-duration:26s;}
+@keyframes fly{to{transform:translateX(120vw);}}
+@keyframes flap{50%{transform:scaleY(0.6);}}
 
 /* ===== GROUND ===== */
 .ground{
@@ -31,51 +61,122 @@ body{
   bottom:0;
   width:100%;
   height:180px;
-  background:linear-gradient(to top,#2e8b57,#6fdc8c);
+  background:#6fcf97;
+  overflow:hidden;
 }
+
+/* ===== GRASS BLADES ===== */
+.grass-blade{
+  position:absolute;
+  bottom:0;
+  width:2px;
+  background:#4fae6b;
+  transform-origin:bottom center;
+  animation:sway 3s ease-in-out infinite alternate;
+}
+@keyframes sway{
+  0%{transform:rotate(-10deg);}
+  50%{transform:rotate(10deg);}
+  100%{transform:rotate(-10deg);}
+}
+
+/* ===== FLOWERS ===== */
+.flower{
+  position:absolute;
+  bottom:60px;
+  width:6px;
+  height:40px; /* stem height */
+  background:#2e7d32;
+  border-radius:2px;
+  transform-origin:bottom center;
+  animation:flowerSway 3s ease-in-out infinite alternate;
+}
+.flower::before{
+  content:"";
+  position:absolute;
+  bottom:30px;
+  left:-5px;
+  width:16px;
+  height:16px;
+  border-radius:50%;
+}
+.flower::after{
+  content:"";
+  position:absolute;
+  bottom:5px;
+  left:-3px;
+  width:5px;
+  height:8px;
+  background:#2e7d32;
+  border-radius:2px;
+  transform:rotate(-20deg);
+}
+@keyframes flowerSway{
+  0%{transform:rotate(-5deg);}
+  50%{transform:rotate(5deg);}
+  100%{transform:rotate(-5deg);}
+}
+
+/* ===== TREES ===== */
+.tree{
+  position:absolute;
+  bottom:180px;
+  width:80px;
+  height:120px;
+  background:#5dbb63;
+  border-radius:50% 50% 40% 40%;
+}
+.tree::after{
+  content:"";
+  position:absolute;
+  bottom:-40px;
+  left:32px;
+  width:16px;
+  height:40px;
+  background:#8d6e63;
+  border-radius:10px;
+}
+.t1{left:360px;}
+.t2{left:480px;transform:scale(0.9);}
 
 /* ===== HOUSE ===== */
 .house{
   position:absolute;
   bottom:180px;
-  left:40px;
-  width:280px;
-  height:220px;
-  background:#f4f1ec;
-  border:4px solid #444;
+  left:60px;
+  width:260px;
+  height:200px;
+  background:#f7f5f2;
+  border-radius:8px;
 }
-
 .roof{
   position:absolute;
-  top:-120px;
+  top:-110px;
   left:-20px;
-  width:320px;
+  width:300px;
   height:120px;
-  background:#8b3a3a;
-  clip-path:polygon(50% 0, 100% 100%, 0 100%);
+  background:#d36b6b;
+  border-radius:20px 20px 8px 8px;
+  clip-path:polygon(50% 5%, 100% 100%, 0 100%);
 }
-
-/* Windows */
 .window{
   position:absolute;
-  top:40px;
-  width:50px;
-  height:50px;
-  background:#9ddcff;
-  border:3px solid #444;
+  top:50px;
+  width:48px;
+  height:48px;
+  background:#cfe9ff;
+  border-radius:6px;
 }
 .window.left{left:40px;}
 .window.right{right:40px;}
-
-/* Door */
 .door{
   position:absolute;
   bottom:0;
-  left:110px;
-  width:60px;
-  height:110px;
-  background:#7b4a12;
-  border:3px solid #3e2508;
+  left:105px;
+  width:50px;
+  height:100px;
+  background:#a47148;
+  border-radius:6px;
   cursor:pointer;
   transform-origin:left;
   transition:0.6s ease;
@@ -83,39 +184,31 @@ body{
 .door::after{
   content:"";
   position:absolute;
-  right:8px;
+  right:6px;
   top:50%;
-  width:8px;
-  height:8px;
-  background:gold;
+  width:6px;
+  height:6px;
+  background:#f5e663;
   border-radius:50%;
 }
 .door.open{
-  transform:rotateY(-75deg);
+  transform:rotateY(-70deg);
 }
 
-/* ===== BIRDS ===== */
-.bird{
+/* ===== BUGS ===== */
+.bug{
   position:absolute;
-  top:20%;
-  left:-100px;
-  width:60px;
-  animation:fly 18s linear infinite;
+  width:6px;
+  height:6px;
+  background:red;
+  border-radius:50%;
+  bottom:60px;
+  animation:crawl linear infinite;
 }
-.bird svg{width:100%;}
-.bird path{
-  fill:#222;
-  animation:flap 0.8s ease-in-out infinite;
-}
-.bird.b2{top:30%;animation-duration:22s;}
-.bird.b3{top:15%;animation-duration:26s;}
-
-@keyframes fly{
-  from{transform:translateX(0);}
-  to{transform:translateX(120vw);}
-}
-@keyframes flap{
-  0%{transform:scaleY(1);}
-  50%{transform:scaleY(0.7);}
-  100%{transform:scaleY(1);}
-}
+@keyframes crawl{
+  0%{transform:translateX(0) translateY(0);}
+  25%{transform:translateX(30px) translateY(-5px);}
+  50%{transform:translateX(60px) translateY(0);}
+  75%{transform:translateX(30px) translateY(5px);}
+  100%{transform:translateX(0) translateY(0);}
+  }
